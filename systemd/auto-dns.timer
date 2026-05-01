@@ -1,0 +1,10 @@
+[Unit]
+Description=Run auto-dns every 5 minutes
+
+[Timer]
+OnBootSec=1min
+OnUnitActiveSec=5min
+Unit=auto-dns.service
+
+[Install]
+WantedBy=timers.target

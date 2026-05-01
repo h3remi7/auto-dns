@@ -1,0 +1,7 @@
+[Unit]
+Description=Update Cloudflare DNS record
+
+[Service]
+Type=oneshot
+EnvironmentFile=/etc/auto-dns.env
+ExecStart=/usr/bin/python3 /opt/auto-dns/auto_dns.py
