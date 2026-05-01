@@ -1,0 +1,12 @@
+services:
+  auto-dns:
+    build: .
+    image: auto-dns:latest
+    container_name: auto-dns
+    restart: unless-stopped
+    network_mode: host
+    cap_add:
+      - NET_ADMIN
+    env_file:
+      - path: .env
+        required: false
