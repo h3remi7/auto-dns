@@ -55,6 +55,7 @@ python3 auto_dns.py
 - `CF_PROXIED`：`true` / `false`
 - `CF_CREATE`：`true` / `false`
 - `CF_DRY_RUN`：`true` / `false`
+- `GATEWAY` / `GATEWAY_INTERFACE`：可选；只有需要强制经指定网关取公网 IP 时才设置，不填则直接使用当前默认网络出口探测公网 IP
 
 ## 定时运行
 
@@ -88,3 +89,8 @@ sudo python3 get_ip_via_policy_routing.py --gateway 192.168.1.1 --interface eth0
 - 默认会给临时路由加 `onlink`，对 `192.168.x.x` 这类主路由网关更稳
 - 临时 `ip rule` 优先级默认在 `main` 路由表之前，避免被现有默认路由抢先匹配
 - 默认会自动尝试多个公网 IP 服务，单个站点不通时会自动回退
+
+在 Docker 定时任务中，`GATEWAY` 和 `GATEWAY_INTERFACE` 也是可选项：
+
+- 不设置：直接使用容器所在宿主机的默认网络出口获取公网 IP
+- 设置：先通过策略路由脚本，经指定网关获取公网 IP，再更新 Cloudflare

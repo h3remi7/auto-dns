@@ -24,6 +24,7 @@ COPY auto_dns.py get_ip_via_policy_routing.py docker/run-ddns-once.sh /app/
 
 RUN chmod +x /app/auto_dns.py /app/get_ip_via_policy_routing.py /app/run-ddns-once.sh \
  && mkdir -p /data/cron \
+ && mkdir -p /logs \
  && echo '* * * * * /app/run-ddns-once.sh' > /data/cron/crontab
 
 CMD ["supercronic", "-inotify", "/data/cron/crontab"]
